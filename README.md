@@ -20,7 +20,6 @@ include 'dropbear'
 ```
 
 ## Other class parameters
-* ensure: present or absent, (default: present)
 * no\_start: boolean, 0 for start dropbear, and 1 for stop (init), (default: 0, start)
 * ssh\_port: integer, ssh TCP port listens on (default: 22)
 * ssh\_args: string, dropbear ssh args (refs: man dropbear)
