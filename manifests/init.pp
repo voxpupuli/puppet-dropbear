@@ -20,7 +20,7 @@ class dropbear (
   $rsakey         = $dropbear::params::rsakey,
   $dsskey         = $dropbear::params::dsskey,
   $receive_window = '65536'
-) {
+) inherits dropbear::params {
 
   package {
     $package_name:
