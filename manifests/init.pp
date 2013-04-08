@@ -13,6 +13,7 @@ import 'params.pp'
 #
 class dropbear (
   $package_name   = $dropbear::params::package_name,
+  $service_name   = $dropbear::params::service_name,
   $no_start       = '0',
   $ssh_port       = '22',
   $ssh_args       = '',
@@ -28,11 +29,11 @@ class dropbear (
   }
 
   service {
-    'dropbear':
+    $service_name:
       ensure      => running,
       hasrestart  => true,
       hasstatus   => false,
-      require     => Package['dropbear'];
+      require     => Package[$package_name];
   }
 
   file {
@@ -42,8 +43,8 @@ class dropbear (
       owner   => root,
       group   => root,
       mode    => '0644',
-      notify  => Service['dropbear'],
-      require => Package['dropbear'];
+      notify  => Service[$service_name],
+      require => Package[$package_name];
   }
 
 } # Class:: dropbear

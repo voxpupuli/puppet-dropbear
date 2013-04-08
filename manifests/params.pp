@@ -13,6 +13,7 @@ class dropbear::params {
   case $::operatingsystem {
     /(Ubuntu|Debian)/: {
       $package_name   = 'dropbear'
+      $service_name   = 'dropbear'
       $rsakey         = '/etc/dropbear/dropbear_rsa_host_key'
       $dsskey         = '/etc/dropbear/dropbear_dss_host_key'
     }
