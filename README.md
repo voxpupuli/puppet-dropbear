@@ -4,10 +4,15 @@ Manage [dropbear](https://matt.ucc.asn.au/dropbear/dropbear.html) SSH server via
 
 ## Usage
 
+### Using default values
+```
+include 'dropbear'
+```
+
+### Overide values
 ```
   class {
     'dropbear':
-      no_start        => '0',
       ssh_port        => '443',
       ssh_args        => '-s',
       banner          => 'Powered by dropbear',
@@ -16,7 +21,7 @@ Manage [dropbear](https://matt.ucc.asn.au/dropbear/dropbear.html) SSH server via
 
 ## Other class parameters
 * ensure: present or absent, (default: present)
-* no\_start: boolean, 0 for start dropbear, and 1 for stop (init), (default: 1, stop)
+* no\_start: boolean, 0 for start dropbear, and 1 for stop (init), (default: 0, start)
 * ssh\_port: integer, ssh TCP port listens on (default: 22)
 * ssh\_args: string, dropbear ssh args (refs: man dropbear)
 * banner: string, banner file containing a message to be sent to clients before they connect
