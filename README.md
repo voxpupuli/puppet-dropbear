@@ -1,4 +1,4 @@
-# puppet-dropbear
+# Puppet-dropbear [![Build Status](https://travis-ci.org/sbadia/puppet-dropbear.png)](https://travis-ci.org/sbadia/puppet-gitlab)
 
 Manage [dropbear](https://matt.ucc.asn.au/dropbear/dropbear.html) SSH server via Puppet
 
