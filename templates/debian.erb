@@ -1,16 +1,16 @@
 # MANAGED BY PUPPET
 # Module:: dropbear
-# File:: template/dropbear.erb
+# File:: template/debian.erb
 #
 # disabled because OpenSSH is installed
 # change to NO_START=0 to enable Dropbear
 NO_START=<%= @no_start %>
 
 # the TCP port that Dropbear listens on
-DROPBEAR_PORT=<%= @ssh_port %>
+DROPBEAR_PORT=<%= @port %>
 
 # any additional arguments for Dropbear
-DROPBEAR_EXTRA_ARGS="<%= @ssh_args %>"
+DROPBEAR_EXTRA_ARGS="<%= @extra_args %>"
 
 # specify an optional banner file containing a message to be
 # sent to clients before they connect, such as "/etc/issue.net"
