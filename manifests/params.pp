@@ -10,15 +10,15 @@
 #
 #
 class dropbear::params {
-  case $::operatingsystem {
-    /(Ubuntu|Debian)/: {
+  case $::osfamily {
+    'Debian': {
       $package_name   = 'dropbear'
       $service_name   = 'dropbear'
       $rsakey         = '/etc/dropbear/dropbear_rsa_host_key'
       $dsskey         = '/etc/dropbear/dropbear_dss_host_key'
     }
     default: {
-      fail("Unsupported platform: ${::operatingsystem}")
+      fail("Unsupported osfamily: ${::osfamily}")
     }
   }
 } # Class:: dropbear::params
