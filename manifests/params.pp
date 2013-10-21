@@ -1,11 +1,3 @@
-# Module:: dropbear
-# Manifest:: params.pp
-#
-# Author:: Sebastien Badia (<seb@sebian.fr>)
-# Date:: 2013-04-08 16:33:49 +0200
-# Maintainer:: Sebastien Badia (<seb@sebian.fr>)
-#
-
 # Class:: dropbear::params
 #
 #
