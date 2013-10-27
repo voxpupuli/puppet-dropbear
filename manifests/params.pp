@@ -1,6 +1,5 @@
 # Class:: dropbear::params
 #
-#
 class dropbear::params {
   case $::osfamily {
     'Debian': {
