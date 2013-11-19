@@ -14,11 +14,13 @@ Dropbear is a relatively small SSH server and client. It runs on a variety of PO
 
 ### Overide values
 
-    class { 'dropbear':
-      port       => '443',
-      extra_args => '-s',
-      banner     => '/etc/banner',
-    }
+```puppet
+class { 'dropbear':
+  port       => '443',
+  extra_args => '-s',
+  banner     => '/etc/banner',
+}
+```
 
 ## Other class parameters
 
