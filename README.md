@@ -10,7 +10,9 @@ Dropbear is a relatively small SSH server and client. It runs on a variety of PO
 
 ### Using default values
 
-    include 'dropbear'
+```puppet
+include 'dropbear'
+```
 
 ### Overide values
 
