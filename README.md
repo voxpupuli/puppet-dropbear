@@ -1,4 +1,8 @@
-# Puppet-dropbear [![Build Status](https://travis-ci.org/sbadia/puppet-dropbear.png)](https://travis-ci.org/sbadia/puppet-gitlab)
+# Puppet-dropbear
+
+[![Build Status](https://travis-ci.org/sbadia/puppet-dropbear.png?branch=master)](https://travis-ci.org/sbadia/puppet-dropbear)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/sbadia/dropbear.svg)](https://forge.puppetlabs.com/sbadia/dropbear)
+[![License](http://img.shields.io/:license-gpl3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
 
 Manage [dropbear](https://matt.ucc.asn.au/dropbear/dropbear.html) SSH server via Puppet
 
@@ -33,6 +37,14 @@ class { 'dropbear':
 * `rsakey`: string, RSA hostkey file (default: /etc/dropbear/dropbear\_rsa\_host\_key)
 * `dsskey`: string, DSS hostkey file (default: /etc/dropbear/dropbear\_dss\_host\_key)
 * `receive_window`: string, Receive window size, this is a tradeoff between memory and network performance (default: 65536)
+
+# Contributors
+
+* https://github.com/sbadia/puppet-dropbear/graphs/contributors
+
+# Release Notes
+
+See [CHANGELOG](https://github.com/sbadia/puppet-dropbear/blob/master/CHANGELOG.md) file.
 
 ## Development
 
