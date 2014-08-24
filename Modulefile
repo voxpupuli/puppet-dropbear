@@ -1,8 +1,0 @@
-name    'sbadia-dropbear'
-version '0.0.3'
-source  'https://github.com/sbadia/puppet-dropbear'
-author  'Kyle Anderson, Sebastien Badia'
-license 'GPLv3'
-summary 'Puppet Dropbear Module'
-description 'Module to install/manage Dropbear SSH server using puppet'
-project_page 'https://github.com/sbadia/puppet-dropbear/'
