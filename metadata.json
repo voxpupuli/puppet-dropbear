@@ -1,6 +1,6 @@
 {
   "name": "sbadia-dropbear",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "author": "Sebastien Badia",
   "summary": "Puppet dropbear Module",
   "license": "GPLv3",
