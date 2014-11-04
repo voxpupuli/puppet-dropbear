@@ -1,3 +1,7 @@
+## 2014-10-05 - 1.0.1
+* Added acceptance checks
+* Fix specs for Rspec > 2.14
+
 ## 2014-08-25 - 1.0.0
 * Switch to metadata.json (puppetforge)
 * Fix spec tests and update readme
