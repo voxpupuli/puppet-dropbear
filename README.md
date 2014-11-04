@@ -42,6 +42,19 @@ class { 'dropbear':
 
 * https://github.com/sbadia/puppet-dropbear/graphs/contributors
 
+# Beaker-Rspec
+
+This module has beaker-rspec tests
+
+To run:
+
+```shell
+bundle install
+bundle exec rspec spec/acceptance
+# or use BEAKER_destroy=no to keep the resulting vm
+BEAKER_destroy=no bundle exec rspec spec/acceptance
+```
+
 # Release Notes
 
 See [CHANGELOG](https://github.com/sbadia/puppet-dropbear/blob/master/CHANGELOG.md) file.
