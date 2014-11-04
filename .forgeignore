@@ -6,5 +6,6 @@
 - .travis.yml
 - .gitignore
 - .fixtures.yml
+- .vagrant
 - Gemfile
 - Gemfile.lock
