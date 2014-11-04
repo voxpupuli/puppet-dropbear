@@ -1,24 +1,40 @@
 {
   "name": "sbadia-dropbear",
-  "version": "1.0.0",
-  "author": "Sebastien Badia",
-  "summary": "Puppet dropbear Module",
+  "version": "1.0.1",
+  "author": "Sebastien Badia, Kyle Anderson",
+  "summary": "Puppet dropbear module",
   "license": "GPLv3",
-  "source": "https://github.com/sbadia/puppet-dropbear",
+  "source": "git://github.com/sbadia/puppet-dropbear.git",
   "project_page": "https://github.com/sbadia/puppet-dropbear/",
   "issues_url": "https://github.com/sbadia/puppet-dropbear/issues",
   "operatingsystem_support": [
-    {"operatingsystem": "Debian"},
-    {"operatingsystem": "Ubuntu"},
-    {"operatingsystem": "CentOS"},
-    {"operatingsystem": "RedHat"}
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": ["6","7"]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": ["12.04","14.04"]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": ["5","6","7"]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": ["19","20"]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": ["5","6","7"]
+    }
   ],
   "requirements": [
-    {"name": "pe","version_requirement": "3.2.x"},
+    {"name": "pe","version_requirement": "3.x"},
     {"name": "puppet","version_requirement": "3.x"}
   ],
   "description": "Module to install/manage Dropbear SSH server using puppet",
   "dependencies": [
-    {"name":"puppetlabs/stdlib","version_requirement":">= 4.1.0"}
+    {"name":"puppetlabs/stdlib","version_requirement":">=4.0.0 <5.0.0"}
   ]
 }
