@@ -13,3 +13,4 @@ gem 'puppet-syntax'
 gem 'puppet', puppetversion
 gem 'puppetlabs_spec_helper'
 gem 'beaker-rspec', '~> 2.2.4'
+gem 'metadata-json-lint'

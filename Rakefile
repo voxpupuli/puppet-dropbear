@@ -93,7 +93,9 @@ namespace :module do
 
 end
 
-
+task :metadata do
+  sh "metadata-json-lint metadata.json"
+end
 
 task(:default).clear
-task :default => [:spec, :lint]
+task :default => [:spec, :lint, :syntax, :metadata]
