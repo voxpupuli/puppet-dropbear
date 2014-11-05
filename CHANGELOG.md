@@ -1,3 +1,8 @@
+## 2014-10-05 - 1.0.2
+* remove deprecated includes
+* added parameters validation
+* added metadata-lint and syntax checks
+
 ## 2014-10-05 - 1.0.1
 * Added acceptance checks
 * Fix specs for Rspec > 2.14

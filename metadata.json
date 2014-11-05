@@ -1,6 +1,6 @@
 {
   "name": "sbadia-dropbear",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Sebastien Badia, Kyle Anderson",
   "summary": "Puppet dropbear module",
   "license": "GPLv3",
