@@ -75,10 +75,6 @@
 # Copyleft 2013 Sebastien Badia.
 # See LICENSE file.
 #
-import 'params.pp'
-
-# Class:: dropbear
-#
 class dropbear (
   $package_name   = $dropbear::params::package_name,
   $service_name   = $dropbear::params::service_name,
@@ -92,6 +88,17 @@ class dropbear (
   $cfg_template   = $dropbear::params::cfg_template,
   $receive_window = '65536'
 ) inherits dropbear::params {
+
+  validate_string($package_name)
+  validate_string($service_name)
+
+  validate_absolute_path($cfg_file)
+  validate_absolute_path($rsakey)
+  validate_absolute_path($dsskey)
+
+  validate_re($no_start, '(0|1)', 'no_start is not valid (0|1)')
+  validate_re($port, '^\d+$', 'port is not a valid number')
+  validate_re($receive_window, '^\d+$', 'receive_window is not a valid number')
 
   package {
     $package_name:
