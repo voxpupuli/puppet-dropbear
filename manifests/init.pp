@@ -20,7 +20,7 @@
 #   Display the contents of the file banner before user login.
 #   Default: nil
 #
-# [*reveive_window*]
+# [*receive_window*]
 #   Specify the per-channel receive window buffer size.
 #   Increasing this may improve network performance at the expense of memory use.
 #   Use -h to see the default buffer size.
