@@ -1,3 +1,7 @@
+## 2015-03-18 - Release 1.0.3
+
+msync: remove 2.7 series, add puppet 4.x lint and blacksmith
+
 ## 2014-10-05 - 1.0.2
 * remove deprecated includes
 * added parameters validation
