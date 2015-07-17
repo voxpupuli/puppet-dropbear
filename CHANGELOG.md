@@ -1,6 +1,11 @@
-## 2015-03-18 - Release 1.0.3
-
-msync: remove 2.7 series, add puppet 4.x lint and blacksmith
+## 2015-07-18 - Release 1.0.3
+* metadata: Fix SPDX licence id
+* msync: fix puppet-rspec version
+* spec: Fix un-supported rspec keyword
+* msync: remove 2.7 series, add puppet 4.x lint and blacksmith
+* rakefile: Fix configuration.fail_on_warnings boolean
+* Update using modulesync
+* Lint documentation parameters and fix missing doc
 
 ## 2014-10-05 - 1.0.2
 * remove deprecated includes
