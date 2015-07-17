@@ -9,6 +9,7 @@
 - .forgeignore
 - .travis.yml
 - .gitignore
+- .bundle/
 - Gemfile
 - Gemfile.lock
 - .fixtures.yml
