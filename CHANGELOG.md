@@ -1,3 +1,11 @@
+## 2017-10-12 - Release 1.0.4
+* spec: Fix spec (RedHat/Debian) tests
+* metadata: Added Debian stretch support
+* modulesync 1.2.1
+* spec: Fix syntax and metadata file
+* spec: refactor spec tests
+* forgeignore: Ignore bundle files
+
 ## 2015-07-18 - Release 1.0.3
 * metadata: Fix SPDX licence id
 * msync: fix puppet-rspec version
