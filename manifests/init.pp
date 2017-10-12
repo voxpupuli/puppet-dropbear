@@ -107,10 +107,10 @@ class dropbear (
 
   service {
     $service_name:
-      ensure      => running,
-      hasrestart  => true,
-      hasstatus   => false,
-      require     => Package[$package_name];
+      ensure     => running,
+      hasrestart => true,
+      hasstatus  => false,
+      require    => Package[$package_name];
   }
 
   file {

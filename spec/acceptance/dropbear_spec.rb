@@ -5,15 +5,15 @@ describe 'dropbear class' do
     hosts.each do |host|
       if fact('osfamily') == 'RedHat'
         if fact('architecture') == 'amd64'
-          on host, "wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm; rpm -ivh epel-release-6-8.noarch.rpm"
+          on host, 'wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm; rpm -ivh epel-release-6-8.noarch.rpm'
         else
-          on host, "wget http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm; rpm -ivh epel-release-6-8.noarch.rpm"
+          on host, 'wget http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm; rpm -ivh epel-release-6-8.noarch.rpm'
         end
       end
     end
 
-   it 'should work with no errors' do
-     pp= <<-EOS
+    it 'works with no errors' do
+      pp = <<-EOS
 
       class {'dropbear':
         port       => '443',
@@ -22,10 +22,9 @@ describe 'dropbear class' do
       }
     EOS
 
-    # Run it twice and test for idempotency
-    apply_manifest(pp, :catch_failures => true)
-    apply_manifest(pp, :catch_changes => true)
+      # Run it twice and test for idempotency
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
+    end
   end
-
- end
 end
