@@ -27,12 +27,12 @@ describe 'dropbear' do
       context 'When an alternate port is given' do
         let(:params) { { port: '42' } }
 
-        it { is_expected.to contain_file(conf_file).with_content(%r{-p 42}) }
+        it { is_expected.to contain_file(conf_file).with_content(%r{42}) }
       end
       context 'When a banner is specified' do
         let(:params) { { banner: '/etc/test_banner' } }
 
-        it { is_expected.to contain_file(conf_file).with_content(%r{-b /etc/test_banner}) }
+        it { is_expected.to contain_file(conf_file).with_content(%r{/etc/test_banner}) }
       end
       context 'When a banner is NOT specified' do
         it { is_expected.not_to contain_file(conf_file).with_content(%r{-b}) }
