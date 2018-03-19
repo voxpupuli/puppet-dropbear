@@ -1,12 +1,12 @@
 {
-  "name": "sbadia-dropbear",
+  "name": "puppet-dropbear",
   "version": "1.0.4",
   "author": "Sebastien Badia, Kyle Anderson",
   "summary": "Puppet dropbear module",
   "license": "GPL-3.0",
-  "source": "git://github.com/sbadia/puppet-dropbear.git",
-  "project_page": "https://github.com/sbadia/puppet-dropbear/",
-  "issues_url": "https://github.com/sbadia/puppet-dropbear/issues",
+  "source": "git://github.com/voxpupuli/puppet-dropbear.git",
+  "project_page": "https://github.com/voxpupuli/puppet-dropbear/",
+  "issues_url": "https://github.com/voxpupuli/puppet-dropbear/issues",
   "operatingsystem_support": [
     {
       "operatingsystem": "Debian",

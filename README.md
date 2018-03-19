@@ -1,7 +1,7 @@
 # Puppet-dropbear
 
-[![Build Status](https://travis-ci.org/sbadia/puppet-dropbear.png?branch=master)](https://travis-ci.org/sbadia/puppet-dropbear)
-[![Puppet Forge](http://img.shields.io/puppetforge/v/sbadia/dropbear.svg)](https://forge.puppetlabs.com/sbadia/dropbear)
+[![Build Status](https://travis-ci.org/voxpupuli/puppet-dropbear.png?branch=master)](https://travis-ci.org/voxpupuli/puppet-dropbear)
+[![Puppet Forge](http://img.shields.io/puppetforge/v/voxpupuli/dropbear.svg)](https://forge.puppetlabs.com/voxpupuli/dropbear)
 [![License](http://img.shields.io/:license-gpl3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0.html)
 
 Manage [dropbear](https://matt.ucc.asn.au/dropbear/dropbear.html) SSH server via Puppet
@@ -40,7 +40,7 @@ class { 'dropbear':
 
 # Contributors
 
-* https://github.com/sbadia/puppet-dropbear/graphs/contributors
+* https://github.com/voxpupuli/puppet-dropbear/graphs/contributors
 
 # Beaker-Rspec
 
@@ -57,8 +57,8 @@ BEAKER_destroy=no bundle exec rspec spec/acceptance
 
 # Release Notes
 
-See [CHANGELOG](https://github.com/sbadia/puppet-dropbear/blob/master/CHANGELOG.md) file.
+See [CHANGELOG](https://github.com/voxpupuli/puppet-dropbear/blob/master/CHANGELOG.md) file.
 
 ## Development
 
-[Feel free to contribute](https://github.com/sbadia/puppet-dropbear/). I'm not a big fan of centralized services like GitHub but I used it to permit easy pull-requests, so show me that's a good idea!
+[Feel free to contribute](https://github.com/voxpupuli/puppet-dropbear/). I'm not a big fan of centralized services like GitHub but I used it to permit easy pull-requests, so show me that's a good idea!
