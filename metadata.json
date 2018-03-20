@@ -1,7 +1,7 @@
 {
   "name": "puppet-dropbear",
   "version": "1.0.4",
-  "author": "Sebastien Badia, Kyle Anderson",
+  "author": "Vox Pupuli",
   "summary": "Puppet dropbear module",
   "license": "GPL-3.0",
   "source": "git://github.com/voxpupuli/puppet-dropbear.git",
@@ -32,7 +32,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.7.0 < 5.0.0"
+      "version_requirement": ">= 4.7.1 < 5.0.0"
     }
   ],
   "description": "Module to install/manage Dropbear SSH server using puppet",
