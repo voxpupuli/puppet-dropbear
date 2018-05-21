@@ -11,7 +11,6 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "7",
         "8",
         "9"
       ]
@@ -31,13 +30,6 @@
       ]
     },
     {
-      "operatingsystem": "Fedora",
-      "operatingsystemrelease": [
-        "24",
-        "25"
-      ]
-    },
-    {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
         "6",
@@ -48,7 +40,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.7.1 < 5.0.0"
+      "version_requirement": ">= 4.10.0 < 6.0.0"
     }
   ],
   "description": "Module to install/manage Dropbear SSH server using puppet",
