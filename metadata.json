@@ -1,6 +1,6 @@
 {
   "name": "puppet-dropbear",
-  "version": "1.1.1",
+  "version": "1.1.2-rc0",
   "author": "Vox Pupuli",
   "summary": "Puppet dropbear module",
   "license": "GPL-3.0",
