@@ -4,16 +4,14 @@ describe 'dropbear' do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
-        unless facts['os'].is_a?(Hash)
-          facts['os'] = {}
-        end
+        facts['os'] = {} unless facts['os'].is_a?(Hash)
 
         case os
-        when /(ubuntu-\d+.\d+|debian-\d+)-x86_64/
+        when %r{^(ubuntu-\d+.\d+|debian-\d+)-x86_64$}
           facts['os']['family'] = 'Debian'
-        when /freebsd-\d+-amd64/
+        when %r{^freebsd-\d+-amd64$}
           facts['os']['family'] = 'FreeBSD'
-        when /(redhat|centos|fedora)-\d+-x86_64/
+        when %r{^(redhat|centos|fedora)-\d+-x86_64$}
           facts['os']['family'] = 'RedHat'
         end
         facts
