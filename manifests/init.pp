@@ -97,37 +97,10 @@ class dropbear (
   Variant[Integer[1], Pattern[/^\d+$/]] $receive_window   = 65536
 ) {
 
-  $dep_warning_port = @(EOS)
-    The dropbear module will not accept strings for the port and receive_window parameters
-    in the next version of this module. Please update your manifests.
-    | EOS
-  if $port =~ String or $receive_window =~ String {
-    deprecation('dropbear::port', $dep_warning_port)
-    $port_int = Integer($port)
-    $receive_window_int = Integer($receive_window)
-    if $port_int !~ Stdlib::Port {
-      fail("Invalid value ${port} for dropbear::port")
-    } elsif $receive_window_int !~ Integer {
-      fail("Invalid value ${receive_window} for dropbear::receive_window")
-    }
-  } else {
-    $port_int = $port
-    $receive_window_int = $receive_window
-  }
-
-  $dep_warning_nostart = @(EOS)
-    The dropbear::no_start parameter is deprecated.   If you do not want to manage
-    the dropbear service, use the dropbear::manage_service option.
-    | EOS
-  if $no_start {
-    deprecation('dropbear::nostart', $dep_warning_nostart)
-    if $no_start == '0' and ! $start_service {
-      warning('dropbear::no_start is 0 and dropbear::start_service is false.  Using manage_service.')
-    }
-    if $no_start == '1' and $start_service {
-      warning('dropbear::no_start is 1 and dropbear::start_service is true.  Using manage_service.')
-    }
-  }
+  validate_legacy(Stdlib::Port, 'validate_re', $port, '^\d+$', 'port is not a valid number')
+  validate_legacy(Integer, 'validate_re', $receive_window, '^\d+$', 'receive_window is not a valid number')
+  $port_int = Integer($port)
+  $receive_window_int = Integer($receive_window)
 
   package {
     $package_name:
