@@ -94,7 +94,7 @@ class dropbear (
   Variant[Stdlib::Port, Pattern[/^\d+$/]] $port           = 22,
   String $extra_args                                      = '',
   Optional[String[1]] $banner                             = undef,
-  Variant[Integer[1], Pattern[/^\d+$/]] $receive_window   = 65536
+  Variant[Integer[1], Pattern[/^\d+$/]] $receive_window   = 65536,
 ) {
 
   validate_legacy(Stdlib::Port, 'validate_re', $port, '^\d+$', 'port is not a valid number')
@@ -112,7 +112,7 @@ class dropbear (
       ensure     => $start_service,
       hasrestart => true,
       hasstatus  => false,
-      require    => Package[$package_name];
+      require    => Package[$package_name],
   }
 
   file {
@@ -123,7 +123,7 @@ class dropbear (
       group   => root,
       mode    => '0444',
       notify  => Service[$service_name],
-      require => Package[$package_name];
+      require => Package[$package_name],
   }
 
 } # Class:: dropbear
