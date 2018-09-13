@@ -1,0 +1,20 @@
+# MANAGED BY PUPPET
+# Module:: dropbear
+# File:: template/redhat.epp
+#
+<%-
+  $b = $dropbear::banner ? {
+    undef   => '',
+    default => "-b ${dropbear::banner}",
+  }
+  $opts = [
+    "-p ${dropbear::port_int}",
+    "-r ${dropbear::rsakey}",
+    "-d ${dropbear::dsskey}",
+    "-W ${dropbear::receive_window_int}",
+    $b,
+    $dropbear::extra_args
+  ]
+  $opt_str = $opts.join(' ')
+-%>
+OPTIONS="<%= $opt_str %>"

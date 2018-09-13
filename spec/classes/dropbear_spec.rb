@@ -4,6 +4,18 @@ describe 'dropbear' do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
+        unless facts['os'].is_a?(Hash)
+          facts['os'] = {}
+        end
+
+        case os
+        when /(ubuntu-\d+.\d+|debian-\d+)-x86_64/
+          facts['os']['family'] = 'Debian'
+        when /freebsd-\d+-amd64/
+          facts['os']['family'] = 'FreeBSD'
+        when /(redhat|centos|fedora)-\d+-x86_64/
+          facts['os']['family'] = 'RedHat'
+        end
         facts
       end
 
@@ -12,7 +24,6 @@ describe 'dropbear' do
       context 'with all defaults' do
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_class('dropbear') }
-        it { is_expected.to contain_class('dropbear::params') }
         it { is_expected.to contain_package('dropbear') }
         it { is_expected.to contain_service('dropbear') }
         it {
@@ -43,6 +54,6 @@ describe 'dropbear' do
   describe 'On an unknown operating system' do
     let(:facts) { { osfamily: 'Unknown' } }
 
-    it { expect { catalogue }.to raise_error(Puppet::Error, %r{Unsupported osfamily}) }
+    it { expect { catalogue }.to raise_error(Puppet::PreformattedError, %r{expects a value for parameter}) }
   end
 end

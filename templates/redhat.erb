@@ -1,5 +1,0 @@
-# MANAGED BY PUPPET
-# Module:: dropbear
-# File:: template/redhat.erb
-#
-OPTIONS="-p <%= @port %><% if @banner != '' -%> -b <%= @banner -%><% end -%> -r <%= @rsakey %> -d <%= @dsskey %> -W <%= @receive_window %> <%= @extra_args %>"

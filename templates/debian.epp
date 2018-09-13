@@ -1,27 +1,31 @@
 # MANAGED BY PUPPET
 # Module:: dropbear
-# File:: template/debian.erb
+# File:: template/debian.epp
 #
 # disabled because OpenSSH is installed
 # change to NO_START=0 to enable Dropbear
-NO_START=<%= @no_start %>
+<%- if $dropbear::start_service { -%>
+NO_START=0
+<%- } else { -%>
+NO_START=1
+<%- } -%>
 
 # the TCP port that Dropbear listens on
-DROPBEAR_PORT=<%= @port %>
+DROPBEAR_PORT=<%= $dropbear::port_int %>
 
 # any additional arguments for Dropbear
-DROPBEAR_EXTRA_ARGS="<%= @extra_args %>"
+DROPBEAR_EXTRA_ARGS="<%= $dropbear::extra_args %>"
 
 # specify an optional banner file containing a message to be
 # sent to clients before they connect, such as "/etc/issue.net"
-DROPBEAR_BANNER="<%= @banner %>"
+DROPBEAR_BANNER="<%= $dropbear::banner %>"
 
 # RSA hostkey file (default: /etc/dropbear/dropbear_rsa_host_key)
-DROPBEAR_RSAKEY="<%= @rsakey %>"
+DROPBEAR_RSAKEY="<%= $dropbear::rsakey %>"
 
 # DSS hostkey file (default: /etc/dropbear/dropbear_dss_host_key)
-DROPBEAR_DSSKEY="<%= @dsskey %>"
+DROPBEAR_DSSKEY="<%= $dropbear::dsskey %>"
 
 # Receive window size - this is a tradeoff between memory and
 # network performance
-DROPBEAR_RECEIVE_WINDOW=<%= @receive_window %>
+DROPBEAR_RECEIVE_WINDOW=<%= $dropbear::receive_window_int %>

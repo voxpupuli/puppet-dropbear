@@ -31,8 +31,14 @@
 # [*package_name*]
 #   Dropbear package name.
 #
+# [*package_version*]
+#    Version of the Dropbear package
+#
 # [*service_name*]
 #   Dropbear service name.
+#
+# [*start_service*]
+#    Boolean to control whether to ensure the service is running
 #
 # [*rsakey*]
 #   Use the contents of the file rsakey for the rsa host key
@@ -60,7 +66,7 @@
 #
 #  class {
 #    'dropbear':
-#      port            => '443',
+#      port            => 443,
 #      extra_args      => '-s',
 #      banner          => '/etc/banner',
 #  }
@@ -76,27 +82,61 @@
 # See LICENSE file.
 #
 class dropbear (
-  String[1] $package_name                               = $dropbear::params::package_name,
-  String[1] $service_name                               = $dropbear::params::service_name,
-  Variant[Integer[0,1], Enum['0', '1']] $no_start       = '0',
-  Variant[Stdlib::Port, Pattern[/^\d+$/]] $port         = '22',
-  $extra_args                                           = '',
-  $banner                                               = '',
-  Stdlib::Absolutepath $rsakey                          = $dropbear::params::rsakey,
-  Stdlib::Absolutepath $dsskey                          = $dropbear::params::dsskey,
-  Stdlib::Absolutepath $cfg_file                        = $dropbear::params::cfg_file,
-  $cfg_template                                         = $dropbear::params::cfg_template,
-  Variant[Integer[0], Pattern[/^\d+$/]] $receive_window = '65536'
-) inherits dropbear::params {
+  String[1] $package_name,
+  String[1] $service_name,
+  Stdlib::Absolutepath $rsakey,
+  Stdlib::Absolutepath $dsskey,
+  Stdlib::Absolutepath $cfg_file,
+  String $cfg_template,
+  String[1] $package_version                              = 'installed',
+  Boolean $start_service                                  = true,
+  Optional[Enum['0', '1']] $no_start                      = undef,
+  Variant[Stdlib::Port, Pattern[/^\d+$/]] $port           = 22,
+  String $extra_args                                      = '',
+  Optional[String[1]] $banner                             = undef,
+  Variant[Integer[1], Pattern[/^\d+$/]] $receive_window   = 65536
+) {
+
+  $dep_warning_port = @(EOS)
+    The dropbear module will not accept strings for the port and receive_window parameters
+    in the next version of this module. Please update your manifests.
+    | EOS
+  if $port =~ String or $receive_window =~ String {
+    deprecation('dropbear::port', $dep_warning_port)
+    $port_int = Integer($port)
+    $receive_window_int = Integer($receive_window)
+    if $port_int !~ Stdlib::Port {
+      fail("Invalid value ${port} for dropbear::port")
+    } elsif $receive_window_int !~ Integer {
+      fail("Invalid value ${receive_window} for dropbear::receive_window")
+    }
+  } else {
+    $port_int = $port
+    $receive_window_int = $receive_window
+  }
+
+  $dep_warning_nostart = @(EOS)
+    The dropbear::no_start parameter is deprecated.   If you do not want to manage
+    the dropbear service, use the dropbear::manage_service option.
+    | EOS
+  if $no_start {
+    deprecation('dropbear::nostart', $dep_warning_nostart)
+    if $no_start == '0' and ! $start_service {
+      warning('dropbear::no_start is 0 and dropbear::start_service is false.  Using manage_service.')
+    }
+    if $no_start == '1' and $start_service {
+      warning('dropbear::no_start is 1 and dropbear::start_service is true.  Using manage_service.')
+    }
+  }
 
   package {
     $package_name:
-      ensure => installed;
+      ensure => $package_version,
   }
 
   service {
     $service_name:
-      ensure     => running,
+      ensure     => $start_service,
       hasrestart => true,
       hasstatus  => false,
       require    => Package[$package_name];
@@ -105,7 +145,7 @@ class dropbear (
   file {
     $cfg_file:
       ensure  => file,
-      content => template($cfg_template),
+      content => epp($cfg_template),
       owner   => root,
       group   => root,
       mode    => '0444',

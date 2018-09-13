@@ -1,0 +1,7 @@
+---
+dropbear::package_name: 'dropbear'
+dropbear::service_name: 'dropbear'
+dropbear::rsakey: '/etc/dropbear/dropbear_rsa_host_key'
+dropbear::dsskey: '/etc/dropbear/dropbear_dss_host_key'
+dropbear::cfg_file: '/etc/default/dropbear'
+dropbear::cfg_template: 'dropbear/debian.epp'
