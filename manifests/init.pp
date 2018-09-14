@@ -98,9 +98,31 @@ class dropbear (
 ) {
 
   validate_legacy(Stdlib::Port, 'validate_re', $port, '^\d+$', 'port is not a valid number')
-  validate_legacy(Integer, 'validate_re', $receive_window, '^\d+$', 'receive_window is not a valid number')
   $port_int = Integer($port)
+  if $port_int !~ Stdlib::Port {
+    err("Port ${port_int} is not a valid port number")
+  }
+  validate_legacy(Integer, 'validate_re', $receive_window, '^\d+$', 'receive_window is not a valid number')
   $receive_window_int = Integer($receive_window)
+
+  $dep_warning_nostart = @(EOS)
+  The dropbear::no_start parameter is deprecated.   If you do not want to manage
+  the dropbear service, use the dropbear::manage_service option.
+  | EOS
+  if $no_start {
+    deprecation('dropbear::nostart', $dep_warning_nostart)
+    if $no_start == '0' and ! $start_service {
+      warning('dropbear::no_start is 0 and dropbear::start_service is false.  Using manage_service.')
+      $_start_service = $start_service
+    } elsif $no_start == '1' and $start_service {
+      warning('dropbear::no_start is 1 and dropbear::start_service is true.  Using no_start.')
+      $_start_service = false
+    } else {
+      $_start_service = $start_service
+    }
+  } else {
+    $_start_service = $start_service
+  }
 
   package {
     $package_name:
@@ -109,7 +131,7 @@ class dropbear (
 
   service {
     $service_name:
-      ensure     => $start_service,
+      ensure     => $_start_service,
       hasrestart => true,
       hasstatus  => false,
       require    => Package[$package_name],

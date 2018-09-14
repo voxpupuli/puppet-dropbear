@@ -4,7 +4,7 @@
 #
 # disabled because OpenSSH is installed
 # change to NO_START=0 to enable Dropbear
-<%- if $dropbear::start_service { -%>
+<%- if $dropbear::_start_service { -%>
 NO_START=0
 <%- } else { -%>
 NO_START=1
