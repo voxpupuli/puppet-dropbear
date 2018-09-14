@@ -100,7 +100,7 @@ class dropbear (
   validate_legacy(Stdlib::Port, 'validate_re', $port, '^\d+$', 'port is not a valid number')
   $port_int = Integer($port)
   if $port_int !~ Stdlib::Port {
-    err("Port ${port_int} is not a valid port number")
+    fail("Port ${port_int} is not a valid port number")
   }
   validate_legacy(Integer, 'validate_re', $receive_window, '^\d+$', 'receive_window is not a valid number')
   $receive_window_int = Integer($receive_window)

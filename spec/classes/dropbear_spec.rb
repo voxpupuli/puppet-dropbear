@@ -43,7 +43,7 @@ describe 'dropbear' do
         context 'When an invalid alternate port is given' do
           let(:params) { { port: '66000' } }
 
-          it { is_expected.to contain_file(conf_file).with_content(%r{(=66000$|-p 66000 )}) }
+          it { expect { catalogue }.to raise_error(Puppet::PreformattedError, %r{not a valid port number}) }
         end
         context 'When receive_window is given' do
           let(:params) { { receive_window: '131072' } }
