@@ -53,12 +53,12 @@ describe 'dropbear' do
         context 'When no_start is 0 and start_service is false' do
           let(:params) { { no_start: '0', start_service: false } }
 
-          it { is_expected.to contain_service(service_name).with({ 'ensure' => false }) }
+          it { is_expected.to contain_service(service_name).with('ensure' => false) }
         end
         context 'When no_start is 1 and start_service is true' do
           let(:params) { { no_start: '1', start_service: true } }
 
-          it { is_expected.to contain_service(service_name).with({ 'ensure' => false }) }
+          it { is_expected.to contain_service(service_name).with('ensure' => false) }
         end
       end
       context 'When an alternate port is given' do
@@ -67,7 +67,7 @@ describe 'dropbear' do
         it { is_expected.to contain_file(conf_file).with_content(%r{(=42$|-p 42 )}) }
       end
       context 'When an invalid alternate port is given' do
-        let(:params) { { port: 66000 } }
+        let(:params) { { port: 66_000 } }
 
         it { expect { catalogue }.to raise_error(Puppet::PreformattedError, %r{expects a value of type Stdlib::Port}) }
       end
