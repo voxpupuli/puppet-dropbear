@@ -76,29 +76,18 @@
 # See LICENSE file.
 #
 class dropbear (
-  $package_name   = $dropbear::params::package_name,
-  $service_name   = $dropbear::params::service_name,
-  $no_start       = '0',
-  $port           = '22',
-  $extra_args     = '',
-  $banner         = '',
-  $rsakey         = $dropbear::params::rsakey,
-  $dsskey         = $dropbear::params::dsskey,
-  $cfg_file       = $dropbear::params::cfg_file,
-  $cfg_template   = $dropbear::params::cfg_template,
-  $receive_window = '65536'
+  String[1] $package_name                               = $dropbear::params::package_name,
+  String[1] $service_name                               = $dropbear::params::service_name,
+  Variant[Integer[0,1], Enum['0', '1']] $no_start       = '0',
+  Variant[Stdlib::Port, Pattern[/^\d+$/]] $port         = '22',
+  $extra_args                                           = '',
+  $banner                                               = '',
+  Stdlib::Absolutepath $rsakey                          = $dropbear::params::rsakey,
+  Stdlib::Absolutepath $dsskey                          = $dropbear::params::dsskey,
+  Stdlib::Absolutepath $cfg_file                        = $dropbear::params::cfg_file,
+  $cfg_template                                         = $dropbear::params::cfg_template,
+  Variant[Integer[0], Pattern[/^\d+$/]] $receive_window = '65536'
 ) inherits dropbear::params {
-
-  validate_string($package_name)
-  validate_string($service_name)
-
-  validate_absolute_path($cfg_file)
-  validate_absolute_path($rsakey)
-  validate_absolute_path($dsskey)
-
-  validate_re($no_start, '(0|1)', 'no_start is not valid (0|1)')
-  validate_re($port, '^\d+$', 'port is not a valid number')
-  validate_re($receive_window, '^\d+$', 'receive_window is not a valid number')
 
   package {
     $package_name:
