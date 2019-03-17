@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v2.0.0](https://github.com/voxpupuli/puppet-dropbear/tree/v2.0.0) (2019-03-09)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-dropbear/compare/v1.1.1...v2.0.0)
+
+**Breaking changes:**
+
+- modulesync 2.6.0 & drop Puppet 4 [\#25](https://github.com/voxpupuli/puppet-dropbear/pull/25) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- adds Fedora 28 to metadata [\#19](https://github.com/voxpupuli/puppet-dropbear/pull/19) ([chadh](https://github.com/chadh))
+
+**Closed issues:**
+
+- Validate Fedora support [\#11](https://github.com/voxpupuli/puppet-dropbear/issues/11)
+
+**Merged pull requests:**
+
+- replace validate\_\* with datatypes [\#24](https://github.com/voxpupuli/puppet-dropbear/pull/24) ([bastelfreak](https://github.com/bastelfreak))
+- modulesync 2.1.0 and allow puppet 6.x [\#21](https://github.com/voxpupuli/puppet-dropbear/pull/21) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v1.1.1](https://github.com/voxpupuli/puppet-dropbear/tree/v1.1.1) (2018-09-07)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-dropbear/compare/v1.1.0...v1.1.1)
