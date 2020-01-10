@@ -1,3 +1,9 @@
 ---
 .travis.yml:
   secure: "JFcQEDJxC6WsGp6AhgmCB7nT1hyBrd58yfcEFZy5fPB17lPCLjCxIL0IG1o5wirv83EtfUvj9TBKUoAMDXgRah78veNX7z2pG/I5lR9fAiCiUsLKBihqj+XGbO7jqBFKJ31Svth9jPB7XqSodJEkfSomdEOmY/4JaS+pKrRZDGI="
+  docker_sets:
+    - set: centos6-64
+    - set: centos7-64
+    - set: debian8-64
+    - set: debian9-64
+    - set: debian10-64
