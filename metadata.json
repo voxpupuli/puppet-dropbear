@@ -4,8 +4,8 @@
   "author": "Vox Pupuli",
   "summary": "Puppet dropbear module",
   "license": "GPL-3.0",
-  "source": "git://github.com/voxpupuli/puppet-dropbear.git",
-  "project_page": "https://github.com/voxpupuli/puppet-dropbear/",
+  "source": "https://github.com/voxpupuli/puppet-dropbear.git",
+  "project_page": "https://github.com/voxpupuli/puppet-dropbear",
   "issues_url": "https://github.com/voxpupuli/puppet-dropbear/issues",
   "operatingsystem_support": [
     {
