@@ -96,7 +96,6 @@ class dropbear (
   Optional[String[1]] $banner                             = undef,
   Variant[Integer[1], Pattern[/^\d+$/]] $receive_window   = 65536,
 ) {
-
   validate_legacy(Stdlib::Port, 'validate_re', $port, '^\d+$', 'port is not a valid number')
   $port_int = Integer($port)
   if $port_int !~ Stdlib::Port {
@@ -105,10 +104,7 @@ class dropbear (
   validate_legacy(Integer, 'validate_re', $receive_window, '^\d+$', 'receive_window is not a valid number')
   $receive_window_int = Integer($receive_window)
 
-  $dep_warning_nostart = @(EOS)
-  The dropbear::no_start parameter is deprecated.   If you do not want to manage
-  the dropbear service, use the dropbear::manage_service option.
-  | EOS
+  $dep_warning_nostart = 'The dropbear::no_start parameter is deprecated. If you do not want to manage the dropbear service, use the dropbear::manage_service option.'
   if $no_start {
     deprecation('dropbear::nostart', $dep_warning_nostart)
     if $no_start == '0' and ! $start_service {
@@ -147,5 +143,4 @@ class dropbear (
       notify  => Service[$service_name],
       require => Package[$package_name],
   }
-
 } # Class:: dropbear
