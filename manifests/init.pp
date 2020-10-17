@@ -1,86 +1,48 @@
-# == Class: dropbear
+# @summary Install and configure dropbear using puppet.
 #
-# Install and configure dropbear using puppet.
+# @author Kyle Anderson <kyle@xkyle.com>
 #
-# === Parameters
-#
-# [*no_start*]
+# @param no_start
 #   Integer (0|1) used to prevent dropbear start.
-#   Default: 0
-#
-# [*port*]
+# @param port
 #   Integer, dropbear listen port
-#   Default: 22
-#
-# [*extra_args*]
+# @param extra_args
 #   Extra argument passed to dropbear deamon (see man)
-#   Default: nil
-#
-# [*banner*]
+# @param banner
 #   Display the contents of the file banner before user login.
-#   Default: nil
-#
-# [*receive_window*]
+# @param receive_window
 #   Specify the per-channel receive window buffer size.
 #   Increasing this may improve network performance at the expense of memory use.
 #   Use -h to see the default buffer size.
-#   Default: 65536
-#
-# === Variables
-#
-# [*package_name*]
+# @param package_name
 #   Dropbear package name.
-#
-# [*package_version*]
+# @param package_version
 #    Version of the Dropbear package
-#
-# [*service_name*]
+# @param service_name
 #   Dropbear service name.
-#
-# [*start_service*]
+# @param start_service
 #    Boolean to control whether to ensure the service is running
-#
-# [*rsakey*]
+# @param rsakey
 #   Use the contents of the file rsakey for the rsa host key
-#   (default: /etc/dropbear/dropbear_rsa_host_key).
 #   This file is generated with dropbearkey
-#
-# [*dsskey*]
+# @param dsskey
 #   Use the contents of the file dsskey for the DSS host key
-#   (default: /etc/dropbear/dropbear_dss_host_key).
 #   Note that some SSH implementations use the term "DSA" rather than "DSS",
 #   they mean the same thing. This file is generated with dropbearkey.
-#
-# [*cfg_file*]
+# @param cfg_file
 #   Location of configuration file.
-#
-# [*cfg_template*]
+# @param cfg_template
 #   Location of configuration template.
 #
-#
-# === Examples
-#
+# @example Install Dropbear
 #  include 'dropbear'
 #
-#   or
-#
-#  class {
-#    'dropbear':
-#      port            => 443,
-#      extra_args      => '-s',
-#      banner          => '/etc/banner',
+# @example Install Dropbear with no-default configuration.
+#  class { 'dropbear':
+#      port       => 443,
+#      extra_args => '-s',
+#      banner     => '/etc/banner',
 #  }
-#
-# === Authors
-#
-# Kyle Anderson <kyle@xkyle.com>
-# Sebastien Badia <seb@sebian.fr>
-#
-# === Copyright
-#
-# Copyleft 2013 Sebastien Badia.
-# See LICENSE file.
-#
 class dropbear (
   String[1] $package_name,
   String[1] $service_name,
