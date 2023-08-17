@@ -25,6 +25,7 @@ describe 'dropbear' do
         it { is_expected.to contain_class('dropbear') }
         it { is_expected.to contain_package('dropbear') }
         it { is_expected.to contain_service('dropbear') }
+
         it {
           is_expected.to contain_file(conf_file).with(
             'owner' => 'root',
@@ -40,42 +41,50 @@ describe 'dropbear' do
 
           it { is_expected.to contain_file(conf_file).with_content(%r{(=42$|-p 42 )}) }
         end
+
         context 'When an invalid alternate port is given' do
           let(:params) { { port: '66000' } }
 
           it { expect { catalogue }.to raise_error(Puppet::PreformattedError, %r{not a valid port number}) }
         end
+
         context 'When receive_window is given' do
           let(:params) { { receive_window: '131072' } }
 
           it { is_expected.to contain_file(conf_file).with_content(%r{131072}) }
         end
+
         context 'When no_start is 0 and start_service is false' do
           let(:params) { { no_start: '0', start_service: false } }
 
           it { is_expected.to contain_service(service_name).with('ensure' => false) }
         end
+
         context 'When no_start is 1 and start_service is true' do
           let(:params) { { no_start: '1', start_service: true } }
 
           it { is_expected.to contain_service(service_name).with('ensure' => false) }
         end
       end
+
       context 'When an alternate port is given' do
         let(:params) { { port: 42 } }
 
         it { is_expected.to contain_file(conf_file).with_content(%r{(=42$|-p 42 )}) }
       end
+
       context 'When an invalid alternate port is given' do
         let(:params) { { port: 66_000 } }
 
         it { expect { catalogue }.to raise_error(Puppet::PreformattedError, %r{expects a value of type Stdlib::Port}) }
       end
+
       context 'When a banner is specified' do
         let(:params) { { banner: '/etc/test_banner' } }
 
         it { is_expected.to contain_file(conf_file).with_content(%r{/etc/test_banner}) }
       end
+
       context 'When a banner is NOT specified' do
         it { is_expected.not_to contain_file(conf_file).with_content(%r{-b}) }
       end
