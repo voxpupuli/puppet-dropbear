@@ -4,11 +4,7 @@ describe 'dropbear' do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
       default_params = {
-        cfg_file: '/etc/sysconfig/dropbear',
-        service_name: 'dropbear',
-        package_name: 'dropbear',
-        rsakey: '/test',
-        dsskey: '/test'
+        cfg_file: '/etc/sysconfig/dropbear'
       }
 
       let(:facts) do

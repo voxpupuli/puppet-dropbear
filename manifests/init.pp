@@ -44,11 +44,11 @@
 #      banner     => '/etc/banner',
 #  }
 class dropbear (
-  String[1] $package_name,
-  String[1] $service_name,
-  Stdlib::Absolutepath $rsakey,
-  Stdlib::Absolutepath $dsskey,
-  Stdlib::Absolutepath $cfg_file,
+  String[1] $package_name                                 = 'dropbear',
+  String[1] $service_name                                 = 'dropbear',
+  Stdlib::Absolutepath $rsakey                            = '/etc/dropbear/dropbear_rsa_host_key',
+  Stdlib::Absolutepath $dsskey                            = '/etc/dropbear/dropbear_dss_host_key',
+  Optional[Stdlib::Absolutepath] $cfg_file                = undef,
   Boolean $manage_config                                  = true,
   String[1] $package_version                              = 'installed',
   Boolean $start_service                                  = true,
@@ -72,6 +72,16 @@ class dropbear (
     }
   } else {
     $_start_service = $start_service
+  }
+
+  if $cfg_file {
+    $_cfg_file = $cfg_file
+  } else {
+    if $facts['os']['family'] == 'Debian' {
+      $_cfg_file = '/etc/sysconfig/dropbear'
+    } else {
+      $_cfg_file = '/etc/default/dropbear'
+    }
   }
 
   package { $package_name:
