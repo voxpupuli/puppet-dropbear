@@ -98,6 +98,8 @@ Data type: `String[1]`
 
 Dropbear package name.
 
+Default value: `'dropbear'`
+
 ##### <a name="-dropbear--package_version"></a>`package_version`
 
 Data type: `String[1]`
@@ -111,6 +113,8 @@ Default value: `'installed'`
 Data type: `String[1]`
 
 Dropbear service name.
+
+Default value: `'dropbear'`
 
 ##### <a name="-dropbear--start_service"></a>`start_service`
 
@@ -127,6 +131,8 @@ Data type: `Stdlib::Absolutepath`
 Use the contents of the file rsakey for the rsa host key
 This file is generated with dropbearkey
 
+Default value: `'/etc/dropbear/dropbear_rsa_host_key'`
+
 ##### <a name="-dropbear--dsskey"></a>`dsskey`
 
 Data type: `Stdlib::Absolutepath`
@@ -135,11 +141,15 @@ Use the contents of the file dsskey for the DSS host key
 Note that some SSH implementations use the term "DSA" rather than "DSS",
 they mean the same thing. This file is generated with dropbearkey.
 
+Default value: `'/etc/dropbear/dropbear_dss_host_key'`
+
 ##### <a name="-dropbear--cfg_file"></a>`cfg_file`
 
-Data type: `Stdlib::Absolutepath`
+Data type: `Optional[Stdlib::Absolutepath]`
 
 Location of configuration file.
+
+Default value: `undef`
 
 ##### <a name="-dropbear--manage_config"></a>`manage_config`
 
