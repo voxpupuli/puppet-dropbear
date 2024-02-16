@@ -60,7 +60,7 @@ Default value: `undef`
 
 ##### <a name="-dropbear--port"></a>`port`
 
-Data type: `Variant[Stdlib::Port, Pattern[/^\d+$/]]`
+Data type: `Stdlib::Port`
 
 Integer, dropbear listen port
 
@@ -68,11 +68,11 @@ Default value: `22`
 
 ##### <a name="-dropbear--extra_args"></a>`extra_args`
 
-Data type: `String`
+Data type: `Optional[String[1]]`
 
 Extra argument passed to dropbear deamon (see man)
 
-Default value: `''`
+Default value: `undef`
 
 ##### <a name="-dropbear--banner"></a>`banner`
 
@@ -84,7 +84,7 @@ Default value: `undef`
 
 ##### <a name="-dropbear--receive_window"></a>`receive_window`
 
-Data type: `Variant[Integer[1], Pattern[/^\d+$/]]`
+Data type: `Integer[1]`
 
 Specify the per-channel receive window buffer size.
 Increasing this may improve network performance at the expense of memory use.
@@ -143,7 +143,9 @@ Location of configuration file.
 
 ##### <a name="-dropbear--cfg_template"></a>`cfg_template`
 
-Data type: `String`
+Data type: `Optional[String[1]]`
 
 Location of configuration template.
+
+Default value: `undef`
 
