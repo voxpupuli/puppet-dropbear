@@ -48,7 +48,7 @@ The following parameters are available in the `dropbear` class:
 * [`rsakey`](#-dropbear--rsakey)
 * [`dsskey`](#-dropbear--dsskey)
 * [`cfg_file`](#-dropbear--cfg_file)
-* [`cfg_template`](#-dropbear--cfg_template)
+* [`manage_config`](#-dropbear--manage_config)
 
 ##### <a name="-dropbear--no_start"></a>`no_start`
 
@@ -141,11 +141,11 @@ Data type: `Stdlib::Absolutepath`
 
 Location of configuration file.
 
-##### <a name="-dropbear--cfg_template"></a>`cfg_template`
+##### <a name="-dropbear--manage_config"></a>`manage_config`
 
-Data type: `Optional[String[1]]`
+Data type: `Boolean`
 
-Location of configuration template.
+Whether to let the module manage the config file or not.
 
-Default value: `undef`
+Default value: `true`
 

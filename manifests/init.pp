@@ -31,8 +31,8 @@
 #   they mean the same thing. This file is generated with dropbearkey.
 # @param cfg_file
 #   Location of configuration file.
-# @param cfg_template
-#   Location of configuration template.
+# @param manage_config
+#   Whether to let the module manage the config file or not.
 #
 # @example Install Dropbear
 #  include 'dropbear'
