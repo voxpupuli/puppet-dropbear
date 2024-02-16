@@ -31,8 +31,8 @@
 #   they mean the same thing. This file is generated with dropbearkey.
 # @param cfg_file
 #   Location of configuration file.
-# @param cfg_template
-#   Location of configuration template.
+# @param manage_config
+#   Whether to let the module manage the config file or not.
 #
 # @example Install Dropbear
 #  include 'dropbear'
@@ -44,28 +44,20 @@
 #      banner     => '/etc/banner',
 #  }
 class dropbear (
-  String[1] $package_name,
-  String[1] $service_name,
-  Stdlib::Absolutepath $rsakey,
-  Stdlib::Absolutepath $dsskey,
-  Stdlib::Absolutepath $cfg_file,
-  String $cfg_template,
+  String[1] $package_name                                 = 'dropbear',
+  String[1] $service_name                                 = 'dropbear',
+  Stdlib::Absolutepath $rsakey                            = '/etc/dropbear/dropbear_rsa_host_key',
+  Stdlib::Absolutepath $dsskey                            = '/etc/dropbear/dropbear_dss_host_key',
+  Optional[Stdlib::Absolutepath] $cfg_file                = undef,
+  Boolean $manage_config                                  = true,
   String[1] $package_version                              = 'installed',
   Boolean $start_service                                  = true,
   Optional[Enum['0', '1']] $no_start                      = undef,
-  Variant[Stdlib::Port, Pattern[/^\d+$/]] $port           = 22,
-  String $extra_args                                      = '',
+  Stdlib::Port $port                                      = 22,
+  Optional[String[1]] $extra_args                         = undef,
   Optional[String[1]] $banner                             = undef,
-  Variant[Integer[1], Pattern[/^\d+$/]] $receive_window   = 65536,
+  Integer[1] $receive_window                              = 65536,
 ) {
-  validate_legacy(Stdlib::Port, 'validate_re', $port, '^\d+$', 'port is not a valid number')
-  $port_int = Integer($port)
-  if $port_int !~ Stdlib::Port {
-    fail("Port ${port_int} is not a valid port number")
-  }
-  validate_legacy(Integer, 'validate_re', $receive_window, '^\d+$', 'receive_window is not a valid number')
-  $receive_window_int = Integer($receive_window)
-
   $dep_warning_nostart = 'The dropbear::no_start parameter is deprecated. If you do not want to manage the dropbear service, use the dropbear::manage_service option.'
   if $no_start {
     deprecation('dropbear::nostart', $dep_warning_nostart)
@@ -82,27 +74,63 @@ class dropbear (
     $_start_service = $start_service
   }
 
-  package {
-    $package_name:
-      ensure => $package_version,
+  if $cfg_file {
+    $_cfg_file = $cfg_file
+  } else {
+    if $facts['os']['family'] == 'Debian' {
+      $_cfg_file = '/etc/sysconfig/dropbear'
+    } else {
+      $_cfg_file = '/etc/default/dropbear'
+    }
   }
 
-  service {
-    $service_name:
-      ensure     => $_start_service,
-      hasrestart => true,
-      hasstatus  => false,
-      require    => Package[$package_name],
+  package { $package_name:
+    ensure => $package_version,
   }
 
-  file {
-    $cfg_file:
-      ensure  => file,
-      content => epp($cfg_template),
-      owner   => root,
-      group   => root,
-      mode    => '0444',
-      notify  => Service[$service_name],
-      require => Package[$package_name],
+  service { $service_name:
+    ensure     => $_start_service,
+    hasrestart => true,
+    hasstatus  => false,
+    require    => Package[$package_name],
   }
-} # Class:: dropbear
+
+  if $manage_config {
+    if $facts['os']['family'] == 'Redhat' {
+      file { $cfg_file:
+        ensure           => file,
+        content          => epp('dropbear/redhat.epp',
+          port           => $port,
+          rsakey         => $rsakey,
+          dsskey         => $dsskey,
+          receive_window => $receive_window,
+          banner         => $banner,
+          extra_args     => $extra_args
+        ),
+        owner            => root,
+        group            => root,
+        mode             => '0444',
+        notify           => Service[$service_name],
+        require          => Package[$package_name],
+      }
+    } else {
+      file { $cfg_file:
+        ensure           => file,
+        content          => epp('dropbear/debian.epp',
+          port           => $port,
+          rsakey         => $rsakey,
+          dsskey         => $dsskey,
+          receive_window => $receive_window,
+          banner         => $banner,
+          extra_args     => $extra_args,
+          start_service  => $_start_service
+        ),
+        owner            => root,
+        group            => root,
+        mode             => '0444',
+        notify           => Service[$service_name],
+        require          => Package[$package_name],
+      }
+    }
+  }
+}

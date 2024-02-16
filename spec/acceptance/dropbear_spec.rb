@@ -6,7 +6,7 @@ describe 'dropbear class' do
     it 'works idempotently with no errors' do
       pp = <<-EOS
       class { 'dropbear':
-        port       => '443',
+        port       => 443,
         extra_args => '-s',
         banner     => '/etc/motd',
       }
