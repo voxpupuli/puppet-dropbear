@@ -3,10 +3,6 @@ require 'spec_helper'
 describe 'dropbear' do
   on_supported_os.each do |os, facts|
     context "on #{os}" do
-      let(:facts) do
-        facts
-      end
-
       default_params = {
         cfg_file: '/etc/sysconfig/dropbear',
         service_name: 'dropbear',
@@ -15,6 +11,9 @@ describe 'dropbear' do
         dsskey: '/test'
       }
 
+      let(:facts) do
+        facts
+      end
       let(:params) do
         default_params
       end
@@ -42,13 +41,13 @@ describe 'dropbear' do
         end
 
         context 'When an invalid alternate port is given' do
-          let(:params) { default_params.merge({ port: 66000 }) }
+          let(:params) { default_params.merge({ port: 66_000 }) }
 
           it { expect { catalogue }.to raise_error(Puppet::PreformattedError) }
         end
 
         context 'When receive_window is given' do
-          let(:params) { default_params.merge({ receive_window: 131072 }) }
+          let(:params) { default_params.merge({ receive_window: 131_072 }) }
 
           it { is_expected.to contain_file('/etc/sysconfig/dropbear').with_content(%r{131072}) }
         end
