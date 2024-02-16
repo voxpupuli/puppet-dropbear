@@ -49,7 +49,7 @@ class dropbear (
   Stdlib::Absolutepath $rsakey,
   Stdlib::Absolutepath $dsskey,
   Stdlib::Absolutepath $cfg_file,
-  Optional[String[1]] $cfg_template                       = undef,
+  Boolean $manage_config                                  = true,
   String[1] $package_version                              = 'installed',
   Boolean $start_service                                  = true,
   Optional[Enum['0', '1']] $no_start                      = undef,
@@ -85,17 +85,7 @@ class dropbear (
     require    => Package[$package_name],
   }
 
-  if $cfg_file {
-    file { $cfg_file:
-      ensure  => file,
-      content => epp($cfg_template),
-      owner   => root,
-      group   => root,
-      mode    => '0444',
-      notify  => Service[$service_name],
-      require => Package[$package_name],
-    }
-  } else {
+  if $manage_config {
     if $facts['os']['family'] == 'Redhat' {
       file { $cfg_file:
         ensure           => file,

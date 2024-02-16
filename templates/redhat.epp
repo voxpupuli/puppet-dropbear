@@ -7,7 +7,7 @@
   Optional[String[1]] $extra_args
 | -%>
 <%
-  $b = if defined($banner) {
+  $b = if $banner {
     "-b ${banner}"
   }
   $opts = [
