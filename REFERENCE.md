@@ -10,68 +10,81 @@
 
 ## Classes
 
-### `dropbear`
+### <a name="dropbear"></a>`dropbear`
 
 Install and configure dropbear using puppet.
 
 #### Examples
 
-##### 
+##### Install Dropbear
 
 ```puppet
 include 'dropbear'
 ```
 
-##### 
+##### Install Dropbear with no-default configuration.
 
 ```puppet
-class {
-  'dropbear':
-    port            => 443,
-    extra_args      => '-s',
-    banner          => '/etc/banner',
+class { 'dropbear':
+    port       => 443,
+    extra_args => '-s',
+    banner     => '/etc/banner',
 }
 ```
 
 #### Parameters
 
-The following parameters are available in the `dropbear` class.
+The following parameters are available in the `dropbear` class:
 
-##### `no_start`
+* [`no_start`](#-dropbear--no_start)
+* [`port`](#-dropbear--port)
+* [`extra_args`](#-dropbear--extra_args)
+* [`banner`](#-dropbear--banner)
+* [`receive_window`](#-dropbear--receive_window)
+* [`package_name`](#-dropbear--package_name)
+* [`package_version`](#-dropbear--package_version)
+* [`service_name`](#-dropbear--service_name)
+* [`start_service`](#-dropbear--start_service)
+* [`rsakey`](#-dropbear--rsakey)
+* [`dsskey`](#-dropbear--dsskey)
+* [`cfg_file`](#-dropbear--cfg_file)
+* [`manage_config`](#-dropbear--manage_config)
+
+##### <a name="-dropbear--no_start"></a>`no_start`
 
 Data type: `Optional[Enum['0', '1']]`
 
 Integer (0|1) used to prevent dropbear start.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `port`
+##### <a name="-dropbear--port"></a>`port`
 
-Data type: `Variant[Stdlib::Port, Pattern[/^\d+$/]]`
+Data type: `Stdlib::Port`
 
 Integer, dropbear listen port
 
 Default value: `22`
 
-##### `extra_args`
+##### <a name="-dropbear--extra_args"></a>`extra_args`
 
-Data type: `String`
+Data type: `Optional[String[1]]`
 
 Extra argument passed to dropbear deamon (see man)
 
-Default value: `''`
+Default value: `undef`
 
-##### `banner`
+##### <a name="-dropbear--banner"></a>`banner`
 
 Data type: `Optional[String[1]]`
 
 Display the contents of the file banner before user login.
 
-Default value: ``undef``
+Default value: `undef`
 
-##### `receive_window`
+##### <a name="-dropbear--receive_window"></a>`receive_window`
 
-Data type: `Variant[Integer[1], Pattern[/^\d+$/]]`
+Data type: `Integer[1]`
 
 Specify the per-channel receive window buffer size.
 Increasing this may improve network performance at the expense of memory use.
@@ -79,13 +92,15 @@ Use -h to see the default buffer size.
 
 Default value: `65536`
 
-##### `package_name`
+##### <a name="-dropbear--package_name"></a>`package_name`
 
 Data type: `String[1]`
 
 Dropbear package name.
 
-##### `package_version`
+Default value: `'dropbear'`
+
+##### <a name="-dropbear--package_version"></a>`package_version`
 
 Data type: `String[1]`
 
@@ -93,46 +108,54 @@ Version of the Dropbear package
 
 Default value: `'installed'`
 
-##### `service_name`
+##### <a name="-dropbear--service_name"></a>`service_name`
 
 Data type: `String[1]`
 
 Dropbear service name.
 
-##### `start_service`
+Default value: `'dropbear'`
+
+##### <a name="-dropbear--start_service"></a>`start_service`
 
 Data type: `Boolean`
 
 Boolean to control whether to ensure the service is running
 
-Default value: ``true``
+Default value: `true`
 
-##### `rsakey`
+##### <a name="-dropbear--rsakey"></a>`rsakey`
 
 Data type: `Stdlib::Absolutepath`
 
 Use the contents of the file rsakey for the rsa host key
-(default: /etc/dropbear/dropbear_rsa_host_key).
 This file is generated with dropbearkey
 
-##### `dsskey`
+Default value: `'/etc/dropbear/dropbear_rsa_host_key'`
+
+##### <a name="-dropbear--dsskey"></a>`dsskey`
 
 Data type: `Stdlib::Absolutepath`
 
 Use the contents of the file dsskey for the DSS host key
-(default: /etc/dropbear/dropbear_dss_host_key).
 Note that some SSH implementations use the term "DSA" rather than "DSS",
 they mean the same thing. This file is generated with dropbearkey.
 
-##### `cfg_file`
+Default value: `'/etc/dropbear/dropbear_dss_host_key'`
 
-Data type: `Stdlib::Absolutepath`
+##### <a name="-dropbear--cfg_file"></a>`cfg_file`
+
+Data type: `Optional[Stdlib::Absolutepath]`
 
 Location of configuration file.
 
-##### `cfg_template`
+Default value: `undef`
 
-Data type: `String`
+##### <a name="-dropbear--manage_config"></a>`manage_config`
 
-Location of configuration template.
+Data type: `Boolean`
+
+Whether to let the module manage the config file or not.
+
+Default value: `true`
 

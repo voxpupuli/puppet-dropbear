@@ -1,20 +1,23 @@
-# MANAGED BY PUPPET
-# Module:: dropbear
-# File:: template/redhat.epp
-#
-<%-
-  $b = $dropbear::banner ? {
-    undef   => '',
-    default => "-b ${dropbear::banner}",
+<% | 
+  Integer[1]          $port,
+  String[1]           $rsakey,
+  String[1]           $dsskey,
+  Integer             $receive_window,
+  Optional[String[1]] $banner,
+  Optional[String[1]] $extra_args
+| -%>
+<%
+  $b = if $banner {
+    "-b ${banner}"
   }
   $opts = [
-    "-p ${dropbear::port_int}",
-    "-r ${dropbear::rsakey}",
-    "-d ${dropbear::dsskey}",
-    "-W ${dropbear::receive_window_int}",
+    "-p ${port}",
+    "-r ${rsakey}",
+    "-d ${dsskey}",
+    "-W ${receive_window}",
     $b,
-    $dropbear::extra_args
+    $extra_args
   ]
-  $opt_str = $opts.join(' ')
+  $opt_str = $opts.delete_undef_values.join(' ')
 -%>
 OPTIONS="<%= $opt_str %>"
